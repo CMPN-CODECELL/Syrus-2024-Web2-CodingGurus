@@ -1,7 +1,7 @@
 import React from "react";
 
 
-
+var cities=["mumbai","goa","delhi"]
 function HeroCarousel(){
     return(
         // <div className="flex items-center justify-center h-screen">
