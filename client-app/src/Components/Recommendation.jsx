@@ -2,7 +2,7 @@ import React from "react";
 
 function Recommendation() {
   return (
-    <div className="bg-white ">
+    <div>
       <div className="flex flex-col text-center mt-10 w-full justify-center items-center">
         <h1 className="text-3xl font-medium title-font text-gray-900 tracking-widest border-b-2 border-blue-500 pb-2 mb-4">
           Explore
@@ -10,8 +10,9 @@ function Recommendation() {
       </div>
       <section className="text-gray-600 body-font overflow-hidden ">
         {/* <div className="container border-blue-700 px-30 py-24  sm:mx-2 md:mx- lg:mx-8 xl:mx-20 2xl:mx-20"> */}
+<div className="flex justify-center items-center h-screen">
         <div className="container  px-30 py-24  sm:mx-2 md:mx-2 lg:mx-8 xl:mx-20 2xl:mx-20">
-          <div className="-my-8  divide-y-2 divide-gray-100">
+          {/* <div className="-my-8  divide-y-2 divide-gray-100"> */}
             <div className="py-5 flex mx-20 px-20 flex-wrap md:flex-nowrap border-t-2 border-b-2 border-l-2 border-r-2 border-blue-200 rounded-md shadow-lg">
               <div className="w-20 h-20 mx-auto my-5 sm:mx-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 flex-shrink-0">
                 <svg

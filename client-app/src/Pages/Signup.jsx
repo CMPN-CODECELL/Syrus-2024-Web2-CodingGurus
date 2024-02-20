@@ -66,13 +66,13 @@ function SignUp() {
   return (
     <>
        <div style={{ backgroundImage: `url(https://images.unsplash.com/photo-1541417904950-b855846fe074?q=80&w=2041&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)`, backgroundSize: 'cover' }}>
-      <div className="py-6 sm:py-8 lg:py-12 w-screen h-screen flex justify-center items-center sm:px-4">
-      <div className=" bg-transparent max-w-xl py-10 px-4 rounded-lg md:px-8 shadow-lg shadow-slate-200 sm:w-full">
-        <h2 className="mb-4 text-center text-2xl font-bold text-blue-200 md:mb-8 lg:text-3xl">Signup</h2>
+      <div className="py-4 sm:py-6 lg:py-8 w-screen h-screen flex justify-center items-center sm:px-4">
+      <div className="bg-white/40 max-w-md py-4 px-4 rounded-lg md:px-8 shadow-lg shadow-slate-200 sm:w-full">
+        <h2 className="mb-4 text-center text-2xl font-bold text-blue-800 md:mb-8 lg:text-3xl">Signup</h2>
             <form className="mx-auto max-w-lg rounded-lg border ring-blue-300">
-              <div className="flex flex-col gap-4 p-4 md:p-8">
+              <div className="flex flex-col gap-4 p-2 md:p-6">
                 <div>
-                  <label htmlFor="user-name" className="mb-2 inline-block text-sm text-blue-200 sm:text-base">User name</label>
+                  <label htmlFor="user-name" className="mb-2 inline-block text-sm text-blue-800 sm:text-base">User name</label>
                   <input
                     id="user-name"
                     type="text"
@@ -82,7 +82,7 @@ function SignUp() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="mb-2 inline-block text-sm text-blue-200 sm:text-base">Email</label>
+                  <label htmlFor="email" className="mb-2 inline-block text-sm text-blue-800 sm:text-base">Email</label>
                   <input
                     id="email"
                     type="email"
@@ -93,7 +93,7 @@ function SignUp() {
                 </div>
 
                 <div>
-                  <label htmlFor="password" className="mb-2 inline-block text-sm text-blue-200 sm:text-base">Password</label>
+                  <label htmlFor="password" className="mb-2 inline-block text-sm text-blue-800 sm:text-base">Password</label>
                   <input
                     id="password"
                     type="password"
@@ -104,7 +104,7 @@ function SignUp() {
                 </div>
 
                 <div>
-                  <label htmlFor="confirm-password" className="mb-2 inline-block text-sm text-blue-200 sm:text-base">Confirm password</label>
+                  <label htmlFor="confirm-password" className="mb-2 inline-block text-sm text-blue-800 sm:text-base">Confirm password</label>
                   <input
                     id="confirm-password"
                     type="password"
