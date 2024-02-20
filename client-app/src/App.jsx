@@ -12,14 +12,18 @@ import Readblog from "./Pages/Readblog";
 import AddBlog from "./Pages/Addblog";
 import HomePage from "./Pages/Home";
 import Navbar from "./Components/Navbar";
+import Explore from "./Pages/Explore";
 
 function App() {
   return (
     <>
       <BrowserRouter>
-        <Navbar />
+        <div>
+          <Navbar />
+        </div>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/explore" element={<Explore />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/blogs" element={<Blogs />} />
