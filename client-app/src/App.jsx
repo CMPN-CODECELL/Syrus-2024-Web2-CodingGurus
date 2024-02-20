@@ -13,6 +13,7 @@ import AddBlog from "./Pages/Addblog";
 import HomePage from "./Pages/Home";
 import Navbar from "./Components/Navbar";
 import Explore from "./Pages/Explore";
+import Footer from "./Components/Footer";
 
 function App() {
   return (
@@ -30,6 +31,9 @@ function App() {
           <Route path="/addblog" element={<AddBlog />} />
           <Route path="/readblog/:id" element={<Readblog />} />
         </Routes>
+        <div>
+          <Footer />
+        </div>
       </BrowserRouter>
     </>
   );
