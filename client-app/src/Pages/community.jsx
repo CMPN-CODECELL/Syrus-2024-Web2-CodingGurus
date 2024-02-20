@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../Firebase/config'; // Assuming firebase.js is in the same directory
-import { addDoc, collection } from 'firebase/firestore';
+import { collection, getDocs, addDoc } from 'firebase/firestore';
 
 function Community() {
   const [posts, setPosts] = useState([]);
@@ -12,11 +12,8 @@ function Community() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const querySnapshot = await db.collection('posts').get();
-        const fetchedPosts = [];
-        querySnapshot.forEach((doc) => {
-          fetchedPosts.push({ id: doc.id, ...doc.data() });
-        });
+        const querySnapshot = await getDocs(collection(db, 'posts'));
+        const fetchedPosts = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         setPosts(fetchedPosts);
       } catch (error) {
         console.error('Error fetching posts: ', error);
@@ -37,7 +34,7 @@ function Community() {
           contact: newPostContact,
         });
         const newPost = { id: postRef.id, title: newPostTitle, content: newPostContent, author: newAuthorName, contact: newPostContact, comments: [] };
-        setPosts([...posts, newPost]);
+        setPosts(prevPosts => [...prevPosts, newPost]);
         setNewPostTitle('');
         setNewPostContent('');
         setNewPostContact('');
