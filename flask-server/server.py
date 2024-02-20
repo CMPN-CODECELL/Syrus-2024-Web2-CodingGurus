@@ -3,7 +3,9 @@ from flask import Flask, jsonify, render_template, request
 app = Flask(__name__)
 
 
-
+@app.route('/')
+def main():
+    return "hii"
 @app.route('/data')
 def getData():
     return jsonify(location={"name": "Kalyan", "latitude":1, "longitude":2})
