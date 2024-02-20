@@ -21,8 +21,11 @@ import Timelineform from "./Pages/Timelineform";
 import Profile from "./Pages/Profile";
 import Community from "./Pages/community";
 import Admin from "./Pages/Admin";
+import ProtectedRoute from "./Components/ProtectedRoute.jsx";
+
 
 function App() {
+  const username = localStorage.getItem("username");
   return (
     <>
       <BrowserRouter>
@@ -40,6 +43,14 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/community" element={<Community />} />
           <Route path="/admin" element={<Admin />} />
+          {/* <Route
+            path="/community"
+            element={
+              <ProtectedRoute user={username} route="/login">
+                <Community />
+              </ProtectedRoute>
+            }
+          /> */}
 
           <Route path="/location" element={<Location />} />
           <Route path="/timelineform" element={<Timelineform />} />
