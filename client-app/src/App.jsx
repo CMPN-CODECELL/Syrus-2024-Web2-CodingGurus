@@ -6,7 +6,6 @@ import Login from "./Pages/Login";
 
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import './App.css'
 
 
 
@@ -17,8 +16,10 @@ import Readblog from "./Pages/Readblog";
 import AddBlog from "./Pages/Addblog";
 import HomePage from "./Pages/Home";
 import Navbar from "./Components/Navbar";
+import Traks from "./Pages/Track"
 import Explore from "./Pages/Explore";
 import Footer from "./Components/Footer";
+import Timelineform from "./Pages/Timelineform";
 import Profile from "./Pages/Profile";
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
 
           <Route path="/location" element={<Location />} />
+          <Route path="/timelineform" element={<Timelineform />} />
         </Routes>
         <div>
           <Footer />
