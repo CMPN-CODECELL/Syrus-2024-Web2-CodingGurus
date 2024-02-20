@@ -110,7 +110,7 @@ def collectdata():
         with open(location_data_files[index % 3], 'w') as json_file3:
             json.dump(data2, json_file3, indent=2)
 
-collectdata()
+# collectdata()
 # 
 
 def extract_location_names(json_data):
