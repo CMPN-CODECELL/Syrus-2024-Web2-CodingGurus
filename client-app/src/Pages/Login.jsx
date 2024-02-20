@@ -53,8 +53,6 @@ function Login() {
     } catch (error) {
       console.error('Error during login:', error);
       alert('Error during login. Please check your credentials.');
-    }finally {
-      setLoading(false);
     }
   };
 
@@ -70,20 +68,9 @@ function Login() {
     } catch (error) {
       console.error('Error during Google login:', error.message);
       alert('Error during Google login. Please try again.');
-    }finally {
-      setLoading(false);
     }
   };
-  if (loading) {
-    return (
-    
-      <div className="h-screen bg-white">
-<div className="flex justify-center items-center h-full">
-  <img className="h-16 w-16" src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif" alt=""/>
-</div>
-</div>
-    );
-  }
+ 
 
   return (
     <>
