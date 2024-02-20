@@ -4,6 +4,7 @@ import HeroCarousel from "../Components/HeroCarousel";
 import Recommendation from "../Components/Recommendation";
 import Banner from "../Components/Banner";
 import Introduction from "../Components/Introduction";
+import Blogs from "../Components/Blogs";
 
 function HomePage() {
   return (
@@ -23,6 +24,8 @@ function HomePage() {
       {/* <!-- text end --> */}
       {/* </section> */}
       <Recommendation />
+
+      <Blogs/>
     </>
   );
 }
