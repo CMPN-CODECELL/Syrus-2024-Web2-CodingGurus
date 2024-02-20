@@ -4,24 +4,23 @@ import { BrowserRouter, Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Login from "./Pages/Login";
 
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
 
-
-
-import Location from './Pages/Location'
+import Location from "./Pages/Location";
 import Signup from "./Pages/Signup";
 import Blogs from "./Pages/Blogs";
 import Readblog from "./Pages/Readblog";
 import AddBlog from "./Pages/Addblog";
 import HomePage from "./Pages/Home";
 import Navbar from "./Components/Navbar";
-import Traks from "./Pages/Track"
+import Traks from "./Pages/Track";
 import Explore from "./Pages/Explore";
 import Footer from "./Components/Footer";
 import Timelineform from "./Pages/Timelineform";
 import Profile from "./Pages/Profile";
 import Community from "./Pages/community";
+import Admin from "./Pages/Admin";
 
 function App() {
   return (
@@ -39,7 +38,8 @@ function App() {
           <Route path="/addblog" element={<AddBlog />} />
           <Route path="/readblog/:id" element={<Readblog />} />
           <Route path="/profile" element={<Profile />} />
-<Route path="/community" element={<Community />} />
+          <Route path="/community" element={<Community />} />
+          <Route path="/admin" element={<Admin />} />
 
           <Route path="/location" element={<Location />} />
           <Route path="/timelineform" element={<Timelineform />} />

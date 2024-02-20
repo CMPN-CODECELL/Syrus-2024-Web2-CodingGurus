@@ -11,7 +11,8 @@ function TravelTimeline() {
   const fetchUserTimeline = async () => {
     try {
       const timelineRef = collection(db, "timeline");
-      const userTimelineQuery = query(timelineRef, where("email", "==", email));
+      const userTimelineQuery = query(timelineRef, where("email", "==", email),where("status", "==", "approved")
+      );
       const snapshot = await getDocs(userTimelineQuery);
 
       const data = snapshot.docs.map((doc) => doc.data());
