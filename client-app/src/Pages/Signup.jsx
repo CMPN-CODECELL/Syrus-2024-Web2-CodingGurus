@@ -1,73 +1,73 @@
 import React, { useState } from 'react';
-// import { Link } from 'react-router-dom';
-// import { useNavigate } from 'react-router-dom';
-// import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
-// import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
-// import { db } from '../Firebase/cofig.js'
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
+import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { db } from '../Firebase/config.js'
 
 function SignUp() {
-  // const [userName, setUserName] = useState('');
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-  // const [confirmPassword, setConfirmPassword] = useState('');
-  // const navigate = useNavigate();
-  // const auth = getAuth();
-  // const googleProvider = new GoogleAuthProvider();
+  const [userName, setUserName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const navigate = useNavigate();
+  const auth = getAuth();
+  const googleProvider = new GoogleAuthProvider();
 
-  // const handleAddUser = async () => {
-  //   if (userName.trim() !== '' && email.trim() !== '' && password.trim() !== '') {
-  //     if (password === confirmPassword) {
-  //       const userDetails = {
-  //         // userName: userName,
-  //         email: email,
-  //         password: password,
-  //         createdAt: serverTimestamp(),
-  //       };
+  const handleAddUser = async () => {
+    if (userName.trim() !== '' && email.trim() !== '' && password.trim() !== '') {
+      if (password === confirmPassword) {
+        const userDetails = {
+          // userName: userName,
+          email: email,
+          password: password,
+          createdAt: serverTimestamp(),
+        };
 
-  //       try {
-  //         // Use the email as the document ID
-  //         const docRef = doc(db, 'users', userName);
+        try {
+          // Use the email as the document ID
+          const docRef = doc(db, 'users', userName);
 
-  //         // Set the user details to Firestore
-  //         await setDoc(docRef, userDetails);
+          // Set the user details to Firestore
+          await setDoc(docRef, userDetails);
 
-  //         alert('User added successfully!');
-  //         // Reset input fields after successful addition
-  //         setUserName('');
-  //         setEmail('');
-  //         setPassword('');
-  //         setConfirmPassword('');
-  //         navigate('/login');
-  //       } catch (error) {
-  //         console.error('Error adding user:', error.message);
-  //       }
-  //     } else {
-  //       alert('Passwords do not match!');
-  //     }
-  //   } else {
-  //     alert('Please enter all details');
-  //   }
-  // };
+          alert('User added successfully!');
+          // Reset input fields after successful addition
+          setUserName('');
+          setEmail('');
+          setPassword('');
+          setConfirmPassword('');
+          navigate('/login');
+        } catch (error) {
+          console.error('Error adding user:', error.message);
+        }
+      } else {
+        alert('Passwords do not match!');
+      }
+    } else {
+      alert('Please enter all details');
+    }
+  };
 
-  // const handleGoogleLogin = async () => {
-  //   try {
-  //     const result = await signInWithPopup(auth, googleProvider);
-  //     const user = result.user;
-  //     const userEmail = user.email;
-  //     // console.log('Successful Google login', user);
-  //     localStorage.setItem('email', JSON.stringify(userEmail));
-  //     alert('Successful Google login');
-  //     navigate('/');
-  //   } catch (error) {
-  //     console.error('Error during Google login:', error.message);
-  //     alert('Error during Google login. Please try again.');
-  //   }
-  // };
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      const user = result.user;
+      const userEmail = user.email;
+      // console.log('Successful Google login', user);
+      localStorage.setItem('email', JSON.stringify(userEmail));
+      alert('Successful Google login');
+      navigate('/login');
+    } catch (error) {
+      console.error('Error during Google login:', error.message);
+      alert('Error during Google login. Please try again.');
+    }
+  };
   return (
     <>
        <div style={{ backgroundImage: `url(https://images.unsplash.com/photo-1541417904950-b855846fe074?q=80&w=2041&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)`, backgroundSize: 'cover' }}>
       <div className="py-6 sm:py-8 lg:py-12 w-screen h-screen flex justify-center items-center sm:px-4">
-      <div className="bg-white bg-transparent max-w-xl py-10 px-4 rounded-lg md:px-8 shadow-lg shadow-slate-200 sm:w-full">
+      <div className=" bg-transparent max-w-xl py-10 px-4 rounded-lg md:px-8 shadow-lg shadow-slate-200 sm:w-full">
         <h2 className="mb-4 text-center text-2xl font-bold text-blue-200 md:mb-8 lg:text-3xl">Signup</h2>
             <form className="mx-auto max-w-lg rounded-lg border ring-blue-300">
               <div className="flex flex-col gap-4 p-4 md:p-8">
@@ -76,8 +76,8 @@ function SignUp() {
                   <input
                     id="user-name"
                     type="text"
-                    // value={userName}
-                    // onChange={(e) => setUserName(e.target.value)}
+                    value={userName}
+                    onChange={(e) => setUserName(e.target.value)}
                     className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-blue-200 transition duration-100 focus:ring"
                   />
                 </div>
@@ -86,8 +86,8 @@ function SignUp() {
                   <input
                     id="email"
                     type="email"
-                    // value={email}
-                    // onChange={(e) => setEmail(e.target.value)}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-blue-200 transition duration-100 focus:ring"
                   />
                 </div>
@@ -97,8 +97,8 @@ function SignUp() {
                   <input
                     id="password"
                     type="password"
-                    // value={password}
-                    // onChange={(e) => setPassword(e.target.value)}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-blue-200 transition duration-100 focus:ring"
                   />
                 </div>
@@ -108,15 +108,15 @@ function SignUp() {
                   <input
                     id="confirm-password"
                     type="password"
-                    // value={confirmPassword}
-                    // onChange={(e) => setConfirmPassword(e.target.value)}
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                     className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-blue-300 transition duration-100 focus:ring"
                   />
                 </div>
 
                 <button
                   type="button"
-                  // onClick={handleAddUser}
+                  onClick={handleAddUser}
                   className="block rounded-lg bg-blue-800 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-blue-300 transition duration-100 hover:bg-blue-700 focus-visible:ring active:bg-blue-600 md:text-base"
                 >
                   Sign up
@@ -129,10 +129,10 @@ function SignUp() {
 
                 <button
                   type="button"
-                  // onClick={handleGoogleLogin}
+                  onClick={handleGoogleLogin}
                  className="flex items-center justify-center gap-2 rounded-lg border border-blue-300 bg-white px-8 py-3 text-center text-sm font-semibold text-gray-800 outline-none ring-gray-300 transition duration-100 hover:bg-gray-100 focus-visible:ring active:bg-gray-200 md:text-base">
                   <svg className="h-5 w-5 shrink-0" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    {/* Google icon paths go here */}
+                    Google icon paths go here
                   </svg>
 
                   Continue with Google
