@@ -5,11 +5,12 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Login from './Pages/Login'
+
 import Signup from './Pages/Signup'
 import Blogs from './Pages/Blogs'
 import Readblog from './Pages/Readblog'
 import AddBlog from './Pages/Addblog'
-
+import HomePage from './Pages/Home';
 
 
 function App() {
@@ -17,8 +18,10 @@ function App() {
 
   return (
     <>
+
     <BrowserRouter>
         <Routes>
+        <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/blogs" element={<Blogs />} />
@@ -27,6 +30,7 @@ function App() {
         </Routes>
     </BrowserRouter>
     
+
     </>
   )
 }
