@@ -25,18 +25,22 @@ var data = [
 }
 var herocards = data.map((item) => {
   return (
-    <div id={`slide${item.id}`} className="relative w-full h-full">
+    <div id={`slide${item.id}`} className="relative w-screen h-screen">
       <img src={item.imgsrc} className="w-full h-full" />
       <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-        {/* <a href={`slide${item.id - 1}`} className="btn btn-circle">
-          ❮
-        </a> */}
-        {/* <a href={`slide${item.id + 1}`} className="btn btn-circle">
-          ❯
-        </a> */}
+        <a href={`#slide${item.id - 1}`} className="btn btn-circle">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+        </a>
+        <a href={`#slide${item.id + 1}`} className="btn btn-circle">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
       </div>
-      <div className="absolute bottom-0 left-0 h-25vh w-70vw flex-col ml-2 items-center justify-center sm:max-w-2xl gap-5  bg-opacity-60">
-        <div className="h-full w-full flex flex-col justify-end p-2 mb-2 overflow-hidden bg-blue-200">
+      <div className="absolute bottom-0 left-0 h-25vh w-70vw flex-col ml-2 items-center justify-center sm:max-w-2xl gap-5 bg-opacity-60">
+        <div className="h-full w-full flex flex-col justify-end p-2 mb-2 overflow-hidden bg-blue-200 bg-opacity-50">
           <p className="text-left text-sm sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-black">
             {item.name}
           </p>

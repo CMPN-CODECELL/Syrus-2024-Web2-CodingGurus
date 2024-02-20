@@ -19,6 +19,7 @@ import HomePage from "./Pages/Home";
 import Navbar from "./Components/Navbar";
 import Explore from "./Pages/Explore";
 import Footer from "./Components/Footer";
+import Profile from "./Pages/Profile";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/addblog" element={<AddBlog />} />
           <Route path="/readblog/:id" element={<Readblog />} />
+          <Route path="/profile" element={<Profile />} />
 
           <Route path="/location" element={<Location />} />
         </Routes>
