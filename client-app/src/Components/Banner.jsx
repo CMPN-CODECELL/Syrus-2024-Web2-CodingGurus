@@ -24,6 +24,7 @@ import axios from 'axios';
 function Banner() {
   const [slides, setSlides] = useState([]);
   const [current, setCurrent] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchData();
@@ -38,6 +39,8 @@ function Banner() {
       })
       .catch(error => {
         console.error('Error fetching data:', error);
+      }).finally(() => {
+        setLoading(false);
       });
   };
 
@@ -50,6 +53,16 @@ function Banner() {
     if (current === slides.length - 1) setCurrent(0);
     else setCurrent(current + 1);
   };
+  if (loading) {
+    return (
+    
+      <div className="h-screen bg-white">
+<div className="flex justify-center items-center h-full">
+  <img className="h-16 w-16" src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif" alt=""/>
+</div>
+</div>
+    );
+  }
 
   return (
     <div className="overflow-hidden relative">

@@ -8,6 +8,7 @@ function Community() {
   const [newPostContent, setNewPostContent] = useState('');
   const [newPostContact, setNewPostContact] = useState('');
   const [newAuthorName, setNewAuthorName] = useState('');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -17,10 +18,22 @@ function Community() {
         setPosts(fetchedPosts);
       } catch (error) {
         console.error('Error fetching posts: ', error);
+      }finally {
+        setLoading(false);
       }
     };
     fetchPosts();
   }, []);
+  if (loading) {
+    return (
+    
+      <div className="h-screen bg-white">
+<div className="flex justify-center items-center h-full">
+  <img className="h-16 w-16" src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif" alt=""/>
+</div>
+</div>
+    );
+  }
 
   const addPost = async (e) => {
     e.preventDefault();

@@ -3,6 +3,7 @@ import { useEffect,useState } from "react";
 import axios from 'axios'
 function Recommendation() {
   const [rec_cards,setrec_cards]=useState(null)
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     // Fetch data when the component mounts
     fetchData();
@@ -66,6 +67,8 @@ function Recommendation() {
     .catch(error => {
       // Handle errors
       console.error('Error fetching data:', error);
+    }).finally(() => {
+      setLoading(false);
     });
   };
 
@@ -76,6 +79,16 @@ function Recommendation() {
     }
     return text;
   };
+  if (loading) {
+    return (
+    
+      <div className="h-screen bg-white">
+<div className="flex justify-center items-center h-full">
+  <img className="h-16 w-16" src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif" alt=""/>
+</div>
+</div>
+    );
+  }
   return (
     <div className="bg-white">
       <div className="flex flex-col text-center pt-10 w-full justify-center items-center">
