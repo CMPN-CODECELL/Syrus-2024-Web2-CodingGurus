@@ -22,6 +22,7 @@ function SignUp() {
           email: email,
           password: password,
           createdAt: serverTimestamp(),
+          visit:{'A':0,'B':0,'C':0},
         };
 
         try {

@@ -21,6 +21,7 @@ import Timelineform from "./Pages/Timelineform";
 import Profile from "./Pages/Profile";
 import Community from "./Pages/community";
 import Admin from "./Pages/Admin";
+import Maps from "./Components/Maps"
 import ProtectedRoute from "./Components/ProtectedRoute.jsx";
 
 
@@ -43,6 +44,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/community" element={<Community />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/maps" element={<Maps />} />
           {/* <Route
             path="/community"
             element={
