@@ -9,13 +9,13 @@ function Profile() {
     <>
     
     
-    <div className="bg-gray-100 h-screen flex items-center justify-cente py-8 px-4 sm:px-6 lg:px-8">
+    {/* <div className="bg-gray-100 h-screen flex items-center justify-cente py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="md:flex md:items-center md:justify-between">
-          {/* User details section */}
+          
           <div className="md:flex md:items-center md:space-x-4">
-            {/* <UserImage /> */}
-            <UserDetail/>
+            
+            
             
           </div>
 
@@ -23,7 +23,9 @@ function Profile() {
         </div>
         
       </div>
-    </div>
+    </div> */}
+    <UserDetail/>
+
     {/* Timeline section */}
     <div className="mt-8 md:mt-0">
             <TravelTimeline />

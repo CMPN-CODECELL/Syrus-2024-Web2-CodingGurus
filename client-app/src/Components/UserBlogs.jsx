@@ -11,7 +11,6 @@ function UserBlogs() {
         <h1 className="text-3xl font-medium title-font text-gray-900 tracking-widest border-b-2 border-blue-500 pb-2 mb-4">Blogs</h1>
       </div>
   
-        <p className="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">This is a section of some simple filler text, also known as placeholder text. It shares some characteristics of a real written text but is random or otherwise generated.</p>
       </div>
      
   

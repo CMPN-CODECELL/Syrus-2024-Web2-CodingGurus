@@ -8,7 +8,7 @@ function Navbar() {
     navigate("/login");
   };
   return (
-    <header className="text-gray-600 body-font bg-white px-52 h-15 p-3 border-b border-gray-500 my-0.2 font-sans font-semibold">
+    <header className="text-gray-600 body-font bg-white  h-15 p-3 border-b border-gray-500 my-0.2 font-sans font-semibold">
       <div className="container mx-auto flex flex-wrap flex-col md:flex-row items-center">
         <div>
           <img

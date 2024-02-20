@@ -21,6 +21,7 @@ import Explore from "./Pages/Explore";
 import Footer from "./Components/Footer";
 import Timelineform from "./Pages/Timelineform";
 import Profile from "./Pages/Profile";
+import Community from "./Pages/community";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path="/addblog" element={<AddBlog />} />
           <Route path="/readblog/:id" element={<Readblog />} />
           <Route path="/profile" element={<Profile />} />
+<Route path="/community" element={<Community />} />
 
           <Route path="/location" element={<Location />} />
           <Route path="/timelineform" element={<Timelineform />} />
