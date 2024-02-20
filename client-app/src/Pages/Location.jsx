@@ -2,6 +2,8 @@
 
 //admin.js
 import React, { useState, useEffect } from "react";
+import { useLocation } from 'react-router-dom';
+import axios from "axios";
 import {
   collection,
   query,
@@ -54,7 +56,7 @@ export default function Explore() {
         )
       );
       // await fetchUserTimeline();
-    
+
       alert("Timeline approved succesfully!");
     } catch (error) {
       console.error("Error approving timeline item:", error.message);
@@ -72,50 +74,92 @@ export default function Explore() {
       console.error("Error discarding timeline item:", error.message);
     }
   };
+  const [searchedData, setSearchedData] = useState([]);
+  const location = useLocation();
+  const destination = new URLSearchParams(location.search).get('destination');
 
-  //admin.jsx
-  return (
-    <>
-      <div class="bg-white py-6 sm:py-8 lg:py-12">
+  useEffect(() => {
+    // Fetch data based on the destination query parameter
+    fetchLocationData(destination);
+  }, [destination]);
+
+  const [citydata, setcitydata] = useState(null)
+  const fetchLocationData = (destination) => {
+    var formData = { 'destination': destination }
+    fetch('http://localhost:5000/search', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+      .then(response => response.json())
+      .then(response => {
+        // Handle the response data
+        console.log(response.data);
+
+        // axios.get('http://localhost:5000/location?destination=${destination}') // Include the specific endpoint
+        //   .then(response => {
+        //     // Handle the response data
+        var data = response.data
+        //     console.log(data);
+        var tempcitydata = data.map(item => {
+          return (
+            <div>
+
+              <h1 class="mb-4 text-center text-5xl font-bold text-gray-800 sm:text-3xl md:mb-6">
+                {item.name}
+              </h1>
+
+              <blockquote class="mb-3 md:mb-6 border-l-2 md:border-l-4 pl-2 md:pl-4 italic text-gray-700 sm:text-xl md:text-2xl md:pl-6">
+                “This is a section of some simple filler text, also known as
+                placeholder text. It shares some characteristics of a real written
+                text but is random or otherwise generated.”
+              </blockquote>
+
+              <div class="relative mb-6 overflow-hidden rounded-lg bg-gray-100 shadow-lg md:mb-8">
+                <img
+                  src={item.image_src}
+                  loading="lazy"
+                  alt="Photo by Minh Pham"
+                  class="h-full w-full object-cover object-center"
+                />
+              </div>
+
+              <div className="px-20 py-10">
+                <p class="mb-3 md:mb-6 border-l-2 md:border-l-4 pl-2 md:pl-4 italic text-gray-700 sm:text-xl md:text-2xl md:pl-6">
+                  {item.info}
+                  <br />
+                  <br />
+                  This is a section of some simple filler text, also known as
+                  placeholder text. It shares some characteristics of a real written
+                  text but is or otherwise generated. It may be used to display a
+                  sample of fonts or generate text for testing. Filler text is dummy
+                  text which has no meaning however looks very similar to real text.
+                </p>
+              </div>
+
+            </div>
+          )
+        })
+        setcitydata(tempcitydata)
+
+      });}
+    const fetchData = async (destination) => {
+      try {
+        // Make your API request here to get data based on the destination
+        // For simplicity, let's assume you have an API function named fetchLocationData
+        const data = await fetchLocationData(destination);
+        setSearchedData(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    //admin.jsx
+    return (
+      <><div class="bg-white py-6 sm:py-8 lg:py-12">
         <div class="mx-auto max-w-screen px-4 md:px-8">
-          <h1 class="mb-4 text-center text-5xl font-bold text-gray-800 sm:text-3xl md:mb-6">
-            Goa
-          </h1>
-
-          <blockquote class="mb-3 md:mb-6 border-l-2 md:border-l-4 pl-2 md:pl-4 italic text-gray-700 sm:text-xl md:text-2xl md:pl-6">
-            “This is a section of some simple filler text, also known as
-            placeholder text. It shares some characteristics of a real written
-            text but is random or otherwise generated.”
-          </blockquote>
-
-          <div class="relative mb-6 overflow-hidden rounded-lg bg-gray-100 shadow-lg md:mb-8">
-            <img
-              src="https://media.istockphoto.com/id/1157048446/photo/aerial-shot-of-the-beach-from-above-showing-sea-beach-mountain-and-a-coconut-plantation-goa.jpg?s=1024x1024&w=is&k=20&c=Fo51rHxVKWpxq3kzEnGdfbEIm42dHcree8Hyzo2Zj9A="
-              loading="lazy"
-              alt="Photo by Minh Pham"
-              class="h-full w-full object-cover object-center"
-            />
-          </div>
-
-          <div className="px-20 py-10">
-            <p class="mb-3 md:mb-6 border-l-2 md:border-l-4 pl-2 md:pl-4 italic text-gray-700 sm:text-xl md:text-2xl md:pl-6">
-              This is a section of some simple filler text, also known as
-              placeholder text. It shares some characteristics of a real written
-              text but is random or otherwise generated. It may be used to
-              display a sample of fonts or generate text for testing. Filler
-              text is dummy text which has no meaning however looks very similar
-              to real text. The important factor when using filler text is that
-              the text looks realistic otherwise it will not look very good.
-              <br />
-              <br />
-              This is a section of some simple filler text, also known as
-              placeholder text. It shares some characteristics of a real written
-              text but is or otherwise generated. It may be used to display a
-              sample of fonts or generate text for testing. Filler text is dummy
-              text which has no meaning however looks very similar to real text.
-            </p>
-          </div>
-
+        {citydata}
           <h2 class="mb-2 text-xxl font-semibold text-gray-800 sm:text-4xl md:mb-4 my-5 flex items-center justify-center">
             Food Specialities
           </h2>
@@ -390,52 +434,55 @@ export default function Explore() {
         </div>
       </div>
 
-      {/* admin.jsx  */}
-      <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">Admin Dashboard</h1>
-      <ul className="space-y-4">
-        {timelineData.map((item) => (
-          <li key={item.id} className="bg-white p-4 rounded-lg shadow-md">
-            <h3 className="text-xl font-bold mb-2">{item.name}</h3>
-            <p>Status: {item.status}</p>
-            <p>Visited State: {item.visitedState}</p>
-            <p>Start Date: {item.startDate}</p>
-            <p>End Date: {item.endDate}</p>
-            <p>Image: {item.image}</p>
-            {/* Add more details as needed */}
-            <ul className="mt-2">
-              {item.destinations.map((destination, index) => (
-                <li key={index} className="border-t pt-2 mt-2">
-                  <h4 className="text-lg font-semibold mb-1">{destination.name}</h4>
-                  <p>Date: {destination.date}</p>
-                  <p>Food: {destination.food}</p>
-                  <p>Hotel: {destination.hotel}</p>
-                  <p>Rating: {destination.rating}</p>
-                  <p>Review: {destination.review}</p>
-                </li>
-              ))}
-            </ul>
-            <div className="flex mt-4">
-              <button
-                className="bg-green-500 text-white px-4 py-2 mr-2 rounded-md hover:bg-green-600"
-                onClick={() => handleApprove(item.id)}
-              >
-                Approve
-              </button>
-              <button
-                className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
-                onClick={() => handleDiscard(item.id)}
-              >
-                Discard
-              </button>
-            </div>
-          </li>
-        ))}
-      </ul>
-    </div>
+        {/* admin.jsx  */}
+        <div className="container mx-auto p-4">
+          <h1 className="text-3xl font-bold mb-4">Admin Dashboard</h1>
+          <ul className="space-y-4">
+            {timelineData.map((item) => (
+              <li key={item.id} className="bg-white p-4 rounded-lg shadow-md">
+                <h3 className="text-xl font-bold mb-2">{item.name}</h3>
+                <p>Status: {item.status}</p>
+                <p>Visited State: {item.visitedState}</p>
+                <p>Start Date: {item.startDate}</p>
+                <p>End Date: {item.endDate}</p>
+                <p>Image: {item.image}</p>
+                {/* Add more details as needed */}
+                <ul className="mt-2">
+                  {item.destinations.map((destination, index) => (
+                    <li key={index} className="border-t pt-2 mt-2">
+                      <h4 className="text-lg font-semibold mb-1">{destination.name}</h4>
+                      <p>Date: {destination.date}</p>
+                      <p>Food: {destination.food}</p>
+                      <p>Hotel: {destination.hotel}</p>
+                      <p>Rating: {destination.rating}</p>
+                      <p>Review: {destination.review}</p>
+                    </li>
+                  ))}
+                </ul>
+                <div className="flex mt-4">
+                  <button
+                    className="bg-green-500 text-white px-4 py-2 mr-2 rounded-md hover:bg-green-600"
+                    onClick={() => handleApprove(item.id)}
+                  >
+                    Approve
+                  </button>
+                  <button
+                    className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
+                    onClick={() => handleDiscard(item.id)}
+                  >
+                    Discard
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-   
-      {/* admin.jsx  */}
-    </>
-  );
-}
+
+        {/* admin.jsx  */}
+      </>
+    );
+  }
+
+
+                  // export default location;
