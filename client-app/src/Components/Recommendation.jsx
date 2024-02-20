@@ -16,20 +16,11 @@ function Recommendation() {
       console.log(data);
       var tempcards=data.map(item=>{
         return(
+          <div className="py-5">
           <div className="py-5 flex mx-20 px-20 flex-wrap md:flex-nowrap border-t-2 border-b-2 border-l-2 border-r-2 border-blue-200 rounded-md shadow-lg">
           <div className="w-20 h-20 mx-auto my-5 sm:mx-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 flex-shrink-0">
-            <svg
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              className="w-8 h-8"
-              viewBox="0 0 24 24"
-            >
-              <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-            </svg>
-          </div>
+  <img src={item.image_src} className="w-full h-full object-cover rounded-full" alt="Item" />
+</div>
           <div className="md:flex-grow xl:mx-10 sm:mx-4 md:mx-4">
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-medium text-gray-900 title-font mb-4">
@@ -48,7 +39,7 @@ function Recommendation() {
               </div>
             </div>
             <p className="leading-relaxed">
-              {item.info}
+            {truncateText(item.info, 30)}
             </p>
             <a className="text-indigo-500 inline-flex items-center mt-4">
               Know More
@@ -67,6 +58,7 @@ function Recommendation() {
             </a>
           </div>
         </div>
+        </div>
         )
       })
       setrec_cards(tempcards);
@@ -76,10 +68,18 @@ function Recommendation() {
       console.error('Error fetching data:', error);
     });
   };
+
+  const truncateText = (text, numWords) => {
+    const words = text.split(' ');
+    if (words.length > numWords) {
+      return words.slice(0, numWords).join(' ') + '...';
+    }
+    return text;
+  };
   return (
     <div className="bg-white">
       <div className="flex flex-col text-center pt-10 w-full justify-center items-center">
-        <h1 className="text-3xl font-bold sm:text-3xl text-black">Explore</h1>
+        <h1 className="text-3xl font-bold py-10 sm:text-3xl text-black">Explore</h1>
       </div>
       <section className="text-gray-600 body-font overflow-hidden ">
         {/* <div className="container border-blue-700 px-30 py-24  sm:mx-2 md:mx- lg:mx-8 xl:mx-20 2xl:mx-20"> */}
@@ -87,14 +87,16 @@ function Recommendation() {
         <div className="flex justify-center items-center h-screen">
           <div className="container  px-30 py-24  sm:mx-2 md:mx-2 lg:mx-8 xl:mx-20 2xl:mx-20">
             {/* <div className="-my-8  divide-y-2 divide-gray-100"> */}
+            <div className="flex justify-center items-center lg:px-30 ">
 
         <div className="container  ">
-          <div className="-my-8  divide-y-2 divide-gray-100">
+          {/* <div className="-my-8  divide-y-2 divide-gray-100"> */}
 
            {rec_cards}
             {/* More items go here */}
           </div>
         </div>
+        {/* </div> */}
       </section>
       <div className="flex justify-center items-center m-5">
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
@@ -102,6 +104,7 @@ function Recommendation() {
         </button>
       </div>
     </div>
+    
   );
 }
 
