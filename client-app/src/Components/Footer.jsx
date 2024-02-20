@@ -19,11 +19,11 @@ function Footer() {
           </span>
         </div>
 
-        <p className="mx-auto mt-6 text-center leading-relaxed text-gray-500">
+        <p className="mx-auto pt-6 text-center leading-relaxed text-gray-500">
           Journey Beyond with Tripsync: Where Planning Meets Community.
         </p>
 
-        <ul className="mt-12 flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12">
+        <ul className="pt-12 flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12">
           <li>
             <a className="text-gray-700 transition hover:text-gray-700/75">
               <Link to="/explore">Explore</Link>
@@ -43,7 +43,7 @@ function Footer() {
           </li>
         </ul>
 
-        <ul className="mt-12 flex justify-center gap-6 md:gap-8">
+        <ul className="pt-12 flex justify-center gap-6 md:gap-8">
           <li>
             <a
               href="#"

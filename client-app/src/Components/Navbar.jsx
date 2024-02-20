@@ -8,7 +8,7 @@ function Navbar() {
     navigate("/login");
   };
   return (
-    <header className="text-gray-600 body-font bg-white px-32 h-15 p-3 border-b border-gray-500 my-0.2 font-sans font-semibold">
+    <header className="text-gray-600 body-font bg-white px-52 h-15 p-3 border-b border-gray-500 my-0.2 font-sans font-semibold">
       <div className="container mx-auto flex flex-wrap flex-col md:flex-row items-center">
         <div>
           <img
@@ -23,7 +23,9 @@ function Navbar() {
           className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0"
         > */}
         {/* <div className="w-10 h-10 rounded-full bg-blue-300" style={{ backgroundImage: `url(${logoImage})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}></div> */}
-        <span className="ml-3 text-xl font-extrabold font-serif">TripSync</span>
+        <span className="ml-3 text-2xl font-extrabold font-serif text-black">
+          TripSync
+        </span>
         {/* </a> */}
         <nav className="md:ml-auto flex flex-wrap it    ems-center text-base justify-center pl-10 pr-10">
           <a className="mr-5 text-zinc-950 px-3">
