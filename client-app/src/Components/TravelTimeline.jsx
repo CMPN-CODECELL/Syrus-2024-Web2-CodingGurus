@@ -11,7 +11,10 @@ function TravelTimeline() {
   const fetchUserTimeline = async () => {
     try {
       const timelineRef = collection(db, "timeline");
-      const userTimelineQuery = query(timelineRef, where("email", "==", email),where("status", "==", "approved")
+      const userTimelineQuery = query(
+        timelineRef,
+        where("email", "==", email),
+        where("status", "==", "approved")
       );
       const snapshot = await getDocs(userTimelineQuery);
 
@@ -50,9 +53,12 @@ function TravelTimeline() {
                 width: "116%",
               }}
             >
+              <h2 class="text-3xl font-bold text-center text-white-100 mb-6">
+                Track your TimeLine
+              </h2>
               <section class="text-gray-600 body-font">
                 <div class="container px-5 py-7 mx-auto  md:w-4/5 flex flex-wrap">
-                  <div class="flex relative pt-10 pb-20 sm:items-center md:w-4/5 mx-auto bg-cyan-50">
+                  <div class="flex relative pt-10 pb-20 sm:items-center md:w-4/5 mx-auto bg-cyan-50 rounded-md">
                     <div class="h-full w-6 absolute inset-0 flex items-center justify-center">
                       <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
                     </div>
@@ -61,7 +67,7 @@ function TravelTimeline() {
                     </div>
                     <div class="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
                       <div class="flex-shrink-0 w-24 h-24 bg-indigo-100 text-indigo-500 rounded-full inline-flex items-center justify-center">
-                        <svg
+                        {/* <svg
                           fill="none"
                           stroke="currentColor"
                           stroke-linecap="round"
@@ -71,7 +77,11 @@ function TravelTimeline() {
                           viewBox="0 0 24 24"
                         >
                           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                        </svg>
+                        </svg> */}
+                        <img
+                          src="https://img.freepik.com/premium-vector/creative-map-location-vector-icon-design_807689-11.jpg?w=740"
+                          alt=""
+                        />
                       </div>
                       <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
                         <h2 class="font-medium title-font text-gray-900 mb-1 text-xl">
@@ -105,7 +115,7 @@ function TravelTimeline() {
                       <li key={destination.name}>
                         <section class="text-gray-600 body-font">
                           <div class="container px-5 py-7 mx-auto flex flex-wrap">
-                            <div class="flex relative pt-10 pb-20 sm:items-center md:w-2/3 mx-auto bg-white">
+                            <div class="flex relative pt-10 pb-10 sm:items-center md:w-2/3 mx-auto bg-white  rounded-md">
                               <div class="h-full w-6 absolute inset-0 flex items-center justify-center">
                                 <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
                               </div>
@@ -132,7 +142,11 @@ function TravelTimeline() {
                                     Date: {destination.date}
                                   </h2>
                                   <p class="leading-relaxed">
-                                    <p>Hotel: {destination.hotel}</p>
+                                    <p>
+                                    
+                                        <ion-icon name="bed-outline"></ion-icon>
+                                      Hotel: {destination.hotel}
+                                    </p>
                                     <p>Food: {destination.food}</p>
                                     <p>Rating: {destination.rating}</p>
                                     <p>Review: {destination.review}</p>
