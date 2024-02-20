@@ -51,6 +51,7 @@ export default function Timelineform() {
         image: e.target.img.value,
         destinations: destinations,
         email: email,
+        status:'notapproved'
       };
   
       await addDoc(timelineRef, timelineData);
