@@ -1,32 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { db } from "../Firebase/config";
-import { collection, getDocs, where, query } from "firebase/firestore";
+import { collection, getDocs,query,limit } from "firebase/firestore";
+
 
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
-  const email = localStorage.getItem("email"); // Fetch email from local storage
+
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        // Create a query with where clause to filter blogs by email
-        const q = query(collection(db, "blogs"), where("email", "==", email));
-        const querySnapshot = await getDocs(q);
-
-        const blogsData = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setBlogs(blogsData);
-
-      } catch (error) {
-        console.error("Error fetching blogs:", error);
-      }
-    };
-
-    fetchData();
-  }, [email]);
+        try {
+          // Create a query with a limit of 3
+          const querySnapshot = await getDocs(
+            query(collection(db, "blogs"), limit(3))
+          );
+  
+          const blogsData = querySnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          setBlogs(blogsData);
+        } catch (error) {
+          console.error("Error fetching blogs:", error);
+        }
+      };
+  
+      fetchData();
+    }, []);
 
   return (
     <>
@@ -34,16 +35,16 @@ export default function Blogs() {
         <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
           <div class="mb-10 md:mb-16">
             <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">
-            Discover Your Stories
+              Explore Travel Blogs
             </h2>
 
             <p class="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">
-               Uncover blogs written by you and relive your expierences
+            Discover fascinating insights about Tourism and its importance.
             </p>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-8">
-            {blogs.map((blog) => (
+          <div className="grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-8 items-center justify-evenly">
+           {blogs.map((blog) => (
                <Link
                 key={blog.id}
                 to={`/readblog/${blog.id}`}
@@ -76,6 +77,14 @@ export default function Blogs() {
           </div>
 
           <div className="flex items-center justify-between sm:col-span-2">
+          <Link to="/blogs">
+            <button
+              type="submit"
+              className="inline-block my-10 rounded-lg bg-green-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-green-300 transition duration-100 hover:bg-green-600 focus-visible:ring active:bg-green-700 md:text-base"
+            >
+              Explore Blogs
+            </button>
+            </Link>
 
 
 

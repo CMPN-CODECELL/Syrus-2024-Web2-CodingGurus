@@ -63,7 +63,7 @@ export default function Timelineform() {
       ]);
   
       // Notify the user about the successful submission
-      alert("Timeline added successfully!");
+      alert("Your timeline will be displayed once admin approves it !");
     } catch (error) {
       console.error("Error submitting form:", error.message);
       // You can add additional error handling or user feedback here
