@@ -10,6 +10,7 @@ import {
   query,
   where,
   getDoc,
+  getDocs,
   updateDoc,
   deleteDoc,
   doc,
@@ -26,9 +27,12 @@ export default function Explore() {
   const userName = localStorage.getItem("username");
 
   // console.log(email)
-
+useEffect(()=>{
+  // incrementVisits()
+},[])
   const incrementVisits = async () => {
-    try {
+    // console.log(category)
+    // try {
       if (userEmail) {
         // Fetch user data using a query
         const documentRef = doc(db, "users", userName);
@@ -55,7 +59,7 @@ export default function Explore() {
           // };
 
           // Update user document with incremented visit counts
-          await updateDoc(querySnapshot.ref, { "visit.A": val });
+          await updateDoc(querySnapshot.ref, { [`visit.A`]: val });
 
           console.log("Visit values incremented successfully:", val);
         } else {
@@ -64,9 +68,9 @@ export default function Explore() {
       } else {
         console.error("Email not found in local storage");
       }
-    } catch (error) {
-      console.error("Error incrementing visits:", error.message);
-    }
+    // } catch (error) {
+    //   console.error("Error incrementing visits:", error.message);
+    // }
   };
   useEffect(() => {
     const fetchNotApprovedData = async () => {
@@ -128,6 +132,7 @@ export default function Explore() {
   useEffect(() => {
     // Fetch data based on the destination query parameter
     fetchLocationData(destination);
+    
   }, [destination]);
 
   const [citydata, setcitydata] = useState(null);
@@ -149,7 +154,9 @@ export default function Explore() {
         //   .then(response => {
         //     // Handle the response data
         var data = response.data;
-        //     console.log(data);
+            // console.log(data[0]);
+        // incrementVisits(data[0].category)
+
         var tempcitydata = data.map((item) => {
           return (
             <div>
@@ -470,10 +477,6 @@ export default function Explore() {
             </div>
           </div>
         </div>
-      </div>
-
-      <div>
-        <button onClick={incrementVisits}>Increment</button>
       </div>
     </>
   );

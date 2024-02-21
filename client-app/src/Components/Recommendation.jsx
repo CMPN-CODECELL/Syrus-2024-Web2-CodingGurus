@@ -3,6 +3,36 @@ import { useEffect, useState } from "react";
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 function Recommendation() {
+
+  useEffect(()=>{
+    handlePredict()
+  },[]);
+  const [prediction, setPrediction] = useState(null);
+
+  const handlePredict = async () => {
+    try {
+      const data = {
+        features: [20,50,30,10000,20], //A,B,C,Budget,age
+      };
+
+      const response = await fetch('http://localhost:5000/predict', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+      setPrediction(result.prediction);
+      console.log('Prediction:', result.prediction);
+    } catch (error) {
+      console.error('Error during prediction:', error);
+    }
+  };
+
+
+
   const navigate=useNavigate();
   const [rec_cards, setrec_cards] = useState(null)
   const [loading, setLoading] = useState(true);
@@ -50,6 +80,8 @@ function Recommendation() {
                   <p className="leading-relaxed">
                     {truncateText(item.info, 30)}
                   </p>
+                  <p className="font-medium">Category:{item.category}</p>
+
                   <a className="text-indigo-500 inline-flex items-center mt-4">
                     Know More
                     <svg
