@@ -68,7 +68,6 @@ export default function Explore() {
       console.error("Error incrementing visits:", error.message);
     }
   };
-
   useEffect(() => {
     const fetchNotApprovedData = async () => {
       try {
