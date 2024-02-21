@@ -11,11 +11,12 @@
 
 //         <div className="mt-4 md:mt-0">
 //           <h2 className="text-2xl font-bold">John McCulling</h2>
-          
+
 //         </div>
 //       </div>
 
-      {/* <div className="mt-8 flex flex-col items-center">
+{
+  /* <div className="mt-8 flex flex-col items-center">
         <h3 className="text-lg font-semibold">User Details</h3>
         <ul className="list-disc pl-4">
           <li>Full Name: John McCulling</li>
@@ -23,8 +24,10 @@
           <li>Instagram ID: johnmcculling</li>
           
         </ul>
-</div> */}
-      {/* <div className="w-full shrink-0 grow-0 basis-auto py-10 lg:w-5/12">
+</div> */
+}
+{
+  /* <div className="w-full shrink-0 grow-0 basis-auto py-10 lg:w-5/12">
         <div className="flex flex-wrap">
           <div className="mb-12 w-full shrink-0 grow-0 basis-auto md:w-6/12 md:px-3 lg:px-6">
             <div className="flex items-start">
@@ -120,8 +123,9 @@
       </div>
       </div>
     </div>
-     */}
-    
+     */
+}
+
 //    <>
 //      <div className="flex items-center justify-center h-screen">
 //       <section className="py-16 bg-blueGray-200">
@@ -188,37 +192,36 @@
 //       </section>
 //     </div>
 //   </>
-  
-  
 
- 
-  
 //   );
 // }
 
 // export default UserDetail;
-import React, { useState, useEffect } from 'react';
-import { db } from '../Firebase/config'; // Assuming firebase.js is in the same directory
-import { collection, query, where, getDocs } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
+import React, { useState, useEffect } from "react";
+import { db } from "../Firebase/config"; // Assuming firebase.js is in the same directory
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
 function UserDetail() {
-  const [userEmail, setUserEmail] = useState('');
+  const [userEmail, setUserEmail] = useState("");
   const auth = getAuth();
-  const userEmailFromStorage = localStorage.getItem('email');
+  const userEmailFromStorage = localStorage.getItem("email");
 
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
-        const usersRef = collection(db, 'users');
-        const q = query(usersRef, where('email', '==', JSON.parse(userEmailFromStorage)));
+        const usersRef = collection(db, "users");
+        const q = query(
+          usersRef,
+          where("email", "==", JSON.parse(userEmailFromStorage))
+        );
         const querySnapshot = await getDocs(q);
-        
+
         querySnapshot.forEach((doc) => {
           setUserEmail(doc.data().email);
         });
       } catch (error) {
-        console.error('Error fetching user details: ', error);
+        console.error("Error fetching user details: ", error);
       }
     };
 
@@ -228,7 +231,7 @@ function UserDetail() {
   }, [userEmailFromStorage]);
 
   return (
-    <div className='bg-gray-200'>
+    <div className="bg-white">
       <div className="flex flex-col items-center justify-center py-10">
         <div className="flex flex-col items-center">
           <div className="mb-2 h-24 w-24 overflow-hidden rounded-full bg-gray-100 shadow-lg md:mb-4 md:h-32 md:w-32">

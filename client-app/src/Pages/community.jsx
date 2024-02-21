@@ -1,24 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import { db } from '../Firebase/config'; // Assuming firebase.js is in the same directory
-import { collection, getDocs, addDoc } from 'firebase/firestore';
+import React, { useState, useEffect } from "react";
+import { db } from "../Firebase/config"; // Assuming firebase.js is in the same directory
+import { collection, getDocs, addDoc } from "firebase/firestore";
 
 function Community() {
   const [posts, setPosts] = useState([]);
-  const [newPostTitle, setNewPostTitle] = useState('');
-  const [newPostContent, setNewPostContent] = useState('');
-  const [newPostContact, setNewPostContact] = useState('');
-  const [newAuthorName, setNewAuthorName] = useState('');
+  const [newPostTitle, setNewPostTitle] = useState("");
+  const [newPostContent, setNewPostContent] = useState("");
+  const [newPostContact, setNewPostContact] = useState("");
+  const [newAuthorName, setNewAuthorName] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, 'posts'));
-        const fetchedPosts = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        const querySnapshot = await getDocs(collection(db, "posts"));
+        const fetchedPosts = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
         setPosts(fetchedPosts);
       } catch (error) {
-        console.error('Error fetching posts: ', error);
-      }finally {
+        console.error("Error fetching posts: ", error);
+      } finally {
         setLoading(false);
       }
     };
@@ -26,12 +29,15 @@ function Community() {
   }, []);
   if (loading) {
     return (
-    
       <div className="h-screen bg-white">
-<div className="flex justify-center items-center h-full">
-  <img className="h-16 w-16" src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif" alt=""/>
-</div>
-</div>
+        <div className="flex justify-center items-center h-full">
+          <img
+            className="h-16 w-16"
+            src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif"
+            alt=""
+          />
+        </div>
+      </div>
     );
   }
 
@@ -39,30 +45,42 @@ function Community() {
     e.preventDefault();
     if (newPostTitle && newPostContent && newPostContact && newAuthorName) {
       try {
-        const postRef = await addDoc(collection(db, 'posts'), {
+        const postRef = await addDoc(collection(db, "posts"), {
           title: newPostTitle,
           content: newPostContent,
           comments: [],
           author: newAuthorName,
           contact: newPostContact,
         });
-        const newPost = { id: postRef.id, title: newPostTitle, content: newPostContent, author: newAuthorName, contact: newPostContact, comments: [] };
-        setPosts(prevPosts => [...prevPosts, newPost]);
-        setNewPostTitle('');
-        setNewPostContent('');
-        setNewPostContact('');
-        setNewAuthorName('');
+        const newPost = {
+          id: postRef.id,
+          title: newPostTitle,
+          content: newPostContent,
+          author: newAuthorName,
+          contact: newPostContact,
+          comments: [],
+        };
+        setPosts((prevPosts) => [...prevPosts, newPost]);
+        setNewPostTitle("");
+        setNewPostContent("");
+        setNewPostContact("");
+        setNewAuthorName("");
       } catch (error) {
-        console.error('Error adding document: ', error);
+        console.error("Error adding document: ", error);
       }
     } else {
-      alert('Title, author, content, and contact number are required!');
+      alert("Title, author, content, and contact number are required!");
     }
   };
 
   return (
-    <div style={{ backgroundImage: `url(https://images.unsplash.com/photo-1541417904950-b855846fe074?q=80&w=2041&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)`, backgroundSize: 'cover' }}>
-      <div className="flex flex-col items-center px-4 justify-center min-h-screen shadow-lg shadow-slate-200">
+    <div
+      style={{
+        backgroundImage: `url(https://images.unsplash.com/photo-1541417904950-b855846fe074?q=80&w=2041&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)`,
+        backgroundSize: "cover",
+      }}
+    >
+      <div className="flex flex-col items-center px-4 justify-center min-h-screen shadow-lg shadow-slate-200 pt-5 text-black">
         <form
           className="bg-white p-8 rounded-lg shadow-md w-full md:w-96"
           onSubmit={addPost}
@@ -116,13 +134,17 @@ function Community() {
             <div key={index} className="bg-white p-4 mb-4 rounded-lg shadow-md">
               <div className="flex items-center mb-2">
                 <div className="w-12 h-12 bg-gray-400 rounded-full mr-4"></div>
-                <p className="font-semibold">{post.author} ({post.contact})</p>
+                <p className="font-semibold">
+                  {post.author} ({post.contact})
+                </p>
               </div>
               <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
               <p>{post.content}</p>
               <div className="mt-4 border-t border-gray-300 pt-4">
                 {post.comments.map((comment, index) => (
-                  <p key={index} className="border-t border-gray-300 pt-2">{comment}</p>
+                  <p key={index} className="border-t border-gray-300 pt-2">
+                    {comment}
+                  </p>
                 ))}
               </div>
             </div>
