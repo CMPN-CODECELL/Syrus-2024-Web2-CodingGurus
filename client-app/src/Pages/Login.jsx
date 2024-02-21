@@ -27,17 +27,18 @@ function Login() {
       if (userName.trim() !== '' && password.trim() !== '') {
         // Use the email to retrieve the document
         const documentRef = doc(db, 'users', userName);
-
+  
         const docSnap = await getDoc(documentRef);
-
+  
         if (docSnap.exists()) {
           const data = docSnap.data();
           const dbPass = data.password;
-          const dbemail=data.email
-
+          const dbemail = data.email;
+  
           if (dbPass === password) {
             // Successful login
             localStorage.setItem('email', JSON.stringify(dbemail));
+            localStorage.setItem('userName', JSON.stringify(userName)); // Add this line
             console.log('Successful login');
             alert('Successful login');
             navigate('/');
@@ -55,14 +56,18 @@ function Login() {
       alert('Error during login. Please check your credentials.');
     }
   };
+  
 
   const handleGoogleLogin = async () => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
       const user = result.user;
       const userEmail = user.email;
-      // console.log('Successful Google login', user);
+      const userName = user.displayName; // Assuming Google provides the display name
+  
       localStorage.setItem('email', JSON.stringify(userEmail));
+      localStorage.setItem('userName', JSON.stringify(userName));
+      
       alert('Successful Google login');
       navigate('/');
     } catch (error) {
@@ -70,6 +75,7 @@ function Login() {
       alert('Error during Google login. Please try again.');
     }
   };
+  
  
 
   return (

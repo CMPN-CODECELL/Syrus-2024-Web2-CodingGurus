@@ -10,6 +10,7 @@ import {
   query,
   where,
   getDocs,
+  getDoc,
   updateDoc,
   deleteDoc,
   doc,
@@ -22,25 +23,23 @@ export default function Explore() {
   //admin.jsx
 
   const [timelineData, setTimelineData] = useState([]);
-  const email = localStorage.getItem("email");
-  const userEmail = localStorage.getItem('email');
-      console.log("useremail",userEmail)
+  // const email = localStorage.getItem("email");
+  const userEmail = JSON.parse(localStorage.getItem('email'));
+  const userName = JSON.parse(localStorage.getItem('userName'));
+  console.log("userName",userName)
+  console.log("userEmail",userEmail)
   // console.log(email)
 
   const incrementVisits = async () => {
     try {
-      
+      const username = localStorage.getItem('userName');
   
-      if (userEmail) {
-        // Fetch user data using a query
-        const querySnapshot = await getDocs(
-          query(collection(db, 'users'), where('email', '==', userEmail))
-        );
+      if (username) {
+        // Fetch user data using the username as the document ID
+        const userRef = doc(db, 'users', username);
+        const userDoc = await getDoc(userRef);
   
-        if (!querySnapshot.empty) {
-          // If user document exists, retrieve the first document in the querySnapshot
-          const userDoc = querySnapshot.docs[0];
-  
+        if (userDoc.exists()) {
           // Retrieve user data
           const userData = userDoc.data();
   
@@ -52,21 +51,21 @@ export default function Explore() {
           };
   
           // Update user document with incremented visit counts
-          await updateDoc(userDoc.ref, { visit: updatedVisit });
+          await updateDoc(userRef, { visit: updatedVisit });
   
           console.log('Visit values incremented successfully:', updatedVisit);
         } else {
           console.error('User document not found');
         }
       } else {
-        console.error('Email not found in local storage');
+        console.error('Username not found in local storage');
       }
     } catch (error) {
       console.error('Error incrementing visits:', error.message);
     }
   };
   
-
+  
   useEffect(() => {
     const fetchNotApprovedData = async () => {
       try {
