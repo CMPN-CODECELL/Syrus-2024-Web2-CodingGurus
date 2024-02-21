@@ -6,10 +6,10 @@ import UserBlogs from "../Components/UserBlogs";
 import { Link, useNavigate } from 'react-router-dom';
 
 function Profile() {
+  const navigate = useNavigate();
 
   const handleSignout = () => {
 
-    const navigate = useNavigate();
     try {
       // Remove email and userName from local storage
       localStorage.removeItem('email');
