@@ -133,7 +133,7 @@ script_dir = os.path.dirname(os.path.realpath(__file__))
 data_folder = os.path.join(script_dir, 'data')
 
 # Specify the filename (replace 'file1.json' with the actual filename)
-file_path = os.path.join(data_folder, 'locationdata1.json')
+file_path = os.path.join(data_folder, 'locationdata3.json')
 
 # Open the JSON file
 with open(file_path, 'r') as json_file:
@@ -141,8 +141,8 @@ with open(file_path, 'r') as json_file:
     data = json.load(json_file)
 tempdata= data
 for item in tempdata:
-    item["rating"] = round(random.uniform(0, 5), 2)
-with open('locationdata1.json', 'w') as json_file3:
+    item["budget"] = round(random.uniform(3000,50000),0)
+with open('locationdata3.json', 'w') as json_file3:
     json.dump(tempdata, json_file3, indent=2)
 
 # organized_data = {}
