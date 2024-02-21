@@ -152,7 +152,7 @@ export default function Explore() {
         //     console.log(data);
         var tempcitydata = data.map((item) => {
           return (
-            <div>
+            <div className="px-52">
               <h1 class="mb-4 text-center text-5xl font-bold text-gray-800 sm:text-3xl md:mb-6">
                 {item.name}
               </h1>

@@ -21,7 +21,7 @@ function Navbar() {
   }, []); // Run the effect only once on component mount
 
   return (
-    <header className="text-gray-600 body-font bg-white  h-15 p-3 border-b border-gray-500 my-0.2 font-sans font-semibold">
+    <header className="text-gray-600 body-font bg-white  h-15 p-3 border-b border-gray-500 my-0.2 font-sans font-semibold px-52">
       <div className="container mx-auto flex flex-wrap flex-col md:flex-row items-center">
         <div>
           <img
