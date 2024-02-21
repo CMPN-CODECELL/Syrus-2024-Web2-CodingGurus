@@ -5,12 +5,11 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 // import { addDoc } from 'firebase/firestore';
 
-import axios from "axios";
 import {
   collection,
   query,
   where,
-  getDoc,
+  getDocs,
   updateDoc,
   deleteDoc,
   doc,
@@ -24,41 +23,49 @@ export default function Explore() {
 
   const [timelineData, setTimelineData] = useState([]);
   const email = localStorage.getItem("email");
+  const userEmail = localStorage.getItem('email');
+      console.log("useremail",userEmail)
+  // console.log(email)
 
   const incrementVisits = async () => {
     try {
-      const userEmail = localStorage.getItem('email');
-
+      
+  
       if (userEmail) {
-        const userRef = doc(db, "users", userEmail);
-        const userDoc = await getDoc(userRef);
-
-        if (userDoc.exists()) {
+        // Fetch user data using a query
+        const querySnapshot = await getDocs(
+          query(collection(db, 'users'), where('email', '==', userEmail))
+        );
+  
+        if (!querySnapshot.empty) {
+          // If user document exists, retrieve the first document in the querySnapshot
+          const userDoc = querySnapshot.docs[0];
+  
+          // Retrieve user data
           const userData = userDoc.data();
-
+  
+          // Increment visit counts
           const updatedVisit = {
             A: (userData.visit?.A || 0) + 1,
             B: (userData.visit?.B || 0) + 1,
             C: (userData.visit?.C || 0) + 1,
           };
-
-          await updateDoc(userRef, { visit: updatedVisit });
-
-          console.log("Visit values incremented successfully:", updatedVisit);
+  
+          // Update user document with incremented visit counts
+          await updateDoc(userDoc.ref, { visit: updatedVisit });
+  
+          console.log('Visit values incremented successfully:', updatedVisit);
         } else {
-          console.error("User document not found");
+          console.error('User document not found');
         }
       } else {
-        console.error("Email not found in local storage");
+        console.error('Email not found in local storage');
       }
     } catch (error) {
-      console.error("Error incrementing visits:", error.message);
+      console.error('Error incrementing visits:', error.message);
     }
   };
-
-  // useEffect(() => {
-  //   incrementVisits(); // Call the incrementVisits function when the component mounts
-  // }, []); // Fetch data when the component mounts
+  
 
   useEffect(() => {
     const fetchNotApprovedData = async () => {
@@ -183,16 +190,7 @@ export default function Explore() {
         setcitydata(tempcitydata);
       });
   };
-  const fetchData = async (destination) => {
-    try {
-      // Make your API request here to get data based on the destination
-      // For simplicity, let's assume you have an API function named fetchLocationData
-      const data = await fetchLocationData(destination);
-      setSearchedData(data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
+
   //admin.jsx
   return (
     <>
@@ -472,54 +470,6 @@ export default function Explore() {
           </div>
         </div>
       </div>
-
-      {/* admin.jsx  */}
-      <div className="container mx-auto p-4">
-        <h1 className="text-3xl font-bold mb-4">Admin Dashboard</h1>
-        <ul className="space-y-4">
-          {timelineData.map((item) => (
-            <li key={item.id} className="bg-white p-4 rounded-lg shadow-md">
-              <h3 className="text-xl font-bold mb-2">{item.name}</h3>
-              <p>Status: {item.status}</p>
-              <p>Visited State: {item.visitedState}</p>
-              <p>Start Date: {item.startDate}</p>
-              <p>End Date: {item.endDate}</p>
-              <p>Image: {item.image}</p>
-              {/* Add more details as needed */}
-              <ul className="mt-2">
-                {item.destinations.map((destination, index) => (
-                  <li key={index} className="border-t pt-2 mt-2">
-                    <h4 className="text-lg font-semibold mb-1">
-                      {destination.name}
-                    </h4>
-                    <p>Date: {destination.date}</p>
-                    <p>Food: {destination.food}</p>
-                    <p>Hotel: {destination.hotel}</p>
-                    <p>Rating: {destination.rating}</p>
-                    <p>Review: {destination.review}</p>
-                  </li>
-                ))}
-              </ul>
-              <div className="flex mt-4">
-                <button
-                  className="bg-green-500 text-white px-4 py-2 mr-2 rounded-md hover:bg-green-600"
-                  onClick={() => handleApprove(item.id)}
-                >
-                  Approve
-                </button>
-                <button
-                  className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
-                  onClick={() => handleDiscard(item.id)}
-                >
-                  Discard
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {/* admin.jsx  */}
 
       <div>
         <button onClick={incrementVisits}>Increment</button>
