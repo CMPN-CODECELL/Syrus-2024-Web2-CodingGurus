@@ -4,6 +4,7 @@ from main2 import mainfunc
 import json
 import os
 import joblib
+import random
 app = Flask(__name__)
 CORS(app, origins="http://localhost:5173")  # Allow requests from http://localhost:5173
 
@@ -40,6 +41,8 @@ def getData():
     location_data = {"name": "Kalyan", "latitude": 1, "longitude": 2}
     return jsonify(location=location_data)
 
+setprediction="A"
+
 @app.route('/recommendation')
 def getrecommendation():
     script_dir = os.path.dirname(os.path.realpath(__file__))
@@ -55,11 +58,18 @@ def getrecommendation():
     # Load JSON data
         json_data = json.load(json_file)
 
+# Property to filter on
+    filter_property = "category"
+    filter_value = setprediction
+
+# Filter the data based on the specified property and value
+    filtered_data = [item for item in json_data if item.get(filter_property) == filter_value]
+    random_elements = random.sample(filtered_data, min(5, len(filtered_data)))
 
 # Select the first 5 elements (or fewer if the file has fewer than 5 elements)
-    selected_data = json_data[:5]
+    # selected_data = filtered_data[:5]
 
-    return selected_data
+    return random_elements
 
 @app.route('/search', methods=['POST'])
 def search_city():
@@ -97,7 +107,6 @@ def search_location():
 
 # Load the trained model
 model = joblib.load('trained_model.joblib')
-
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.get_json(force=True)
@@ -107,7 +116,7 @@ def predict():
 
     # Make predictions
     prediction = model.predict([features])[0]
-
+    setprediction=prediction
     # Return the prediction
     return jsonify({'prediction': prediction})
 
