@@ -9,7 +9,7 @@ import {
   collection,
   query,
   where,
-  getDocs,
+  getDoc,
   updateDoc,
   deleteDoc,
   doc,
@@ -22,50 +22,52 @@ export default function Explore() {
   //admin.jsx
 
   const [timelineData, setTimelineData] = useState([]);
-  const email = localStorage.getItem("email");
-  const userEmail = localStorage.getItem('email');
-      console.log("useremail",userEmail)
+  const userEmail = localStorage.getItem("email");
+  const userName = localStorage.getItem("username");
+
   // console.log(email)
 
   const incrementVisits = async () => {
     try {
-      
-  
       if (userEmail) {
         // Fetch user data using a query
-        const querySnapshot = await getDocs(
-          query(collection(db, 'users'), where('email', '==', userEmail))
-        );
-  
-        if (!querySnapshot.empty) {
+        const documentRef = doc(db, "users", userName);
+
+        const querySnapshot = await getDoc(documentRef);
+
+        if (querySnapshot.exists()) {
           // If user document exists, retrieve the first document in the querySnapshot
-          const userDoc = querySnapshot.docs[0];
-  
+          // const userDoc = querySnapshot.docs;
+
           // Retrieve user data
-          const userData = userDoc.data();
-  
+          // const userData = userDoc.data();
+          const update = Number.parseInt(querySnapshot.data()["visit"]["A"]);
+          const val = update + 1;
+          console.log(querySnapshot.data());
+          console.log(update);
+
+          // querySnapshot.updateDoc({ "visit.A": update });
           // Increment visit counts
-          const updatedVisit = {
-            A: (userData.visit?.A || 0) + 1,
-            B: (userData.visit?.B || 0) + 1,
-            C: (userData.visit?.C || 0) + 1,
-          };
-  
+          // const updatedVisit = {
+          //   A: (userData.visit?.A || 0) + 1,
+          //   B: (userData.visit?.B || 0) + 1,
+          //   C: (userData.visit?.C || 0) + 1,
+          // };
+
           // Update user document with incremented visit counts
-          await updateDoc(userDoc.ref, { visit: updatedVisit });
-  
-          console.log('Visit values incremented successfully:', updatedVisit);
+          await updateDoc(querySnapshot.ref, { "visit.A": val });
+
+          console.log("Visit values incremented successfully:", val);
         } else {
-          console.error('User document not found');
+          console.error("User document not found");
         }
       } else {
-        console.error('Email not found in local storage');
+        console.error("Email not found in local storage");
       }
     } catch (error) {
-      console.error('Error incrementing visits:', error.message);
+      console.error("Error incrementing visits:", error.message);
     }
   };
-  
 
   useEffect(() => {
     const fetchNotApprovedData = async () => {
