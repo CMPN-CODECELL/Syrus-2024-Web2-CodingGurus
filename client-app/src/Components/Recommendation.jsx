@@ -22,7 +22,7 @@ function Recommendation() {
       .then(response => {
         // Handle the response data
         var data = response.data
-        console.log(data);
+        // console.log(data);
         var tempcards = data.map(item => {
           return (
             <div className="py-5" onClick={() => handleClick(item)} key={item.id}>

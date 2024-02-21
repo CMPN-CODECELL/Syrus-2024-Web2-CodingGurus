@@ -116,7 +116,7 @@ const navigate=useNavigate()
           </svg> */}
         </div>
 
-        <form onSubmit={handleFormSubmit}>
+        <form onSubmit={handleFormSubmit} className="flex">
       {/* <input
         type="text"
         name="destination"
