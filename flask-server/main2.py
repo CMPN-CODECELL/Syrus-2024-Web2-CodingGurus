@@ -5,6 +5,7 @@ import jsonify
 import json
 import os
 import re
+import random
 # with open("website.html", encoding='utf-8') as file:
 #     data = file.read()
 #
@@ -132,28 +133,34 @@ script_dir = os.path.dirname(os.path.realpath(__file__))
 data_folder = os.path.join(script_dir, 'data')
 
 # Specify the filename (replace 'file1.json' with the actual filename)
-file_path = os.path.join(data_folder, 'locationdata1.json')
+file_path = os.path.join(data_folder, 'locationdata3.json')
 
 # Open the JSON file
 with open(file_path, 'r') as json_file:
     # Load JSON data
     data = json.load(json_file)
-organized_data = {}
-# data=data[:30]
-# Process each item in the original data
-for item in data:
-    # Extract the last city name from the link
-    city_name = item["link"].split("-")[-1]
-    if city_name == "pradesh":
-        city_name=item["link"].split("-")[-2]+item["link"].split("-")[-1]
+tempdata= data
+for item in tempdata:
+    item["category"] = random.choice(['A', 'B', 'C'])
+with open('locationdata3.json', 'w') as json_file3:
+    json.dump(tempdata, json_file3, indent=2)
 
-    # print(city_name)    
-    # Check if the city_name is already a key in the dictionary
-    if city_name not in organized_data:
-        organized_data[city_name] = []
+# organized_data = {}
+# # data=data[:30]
+# # Process each item in the original data
+# for item in data:
+#     # Extract the last city name from the link
+#     city_name = item["link"].split("-")[-1]
+#     if city_name == "pradesh":
+#         city_name=item["link"].split("-")[-2]+item["link"].split("-")[-1]
 
-    # Append the item to the corresponding array
-    organized_data[city_name].append(item['name'])
+#     # print(city_name)    
+#     # Check if the city_name is already a key in the dictionary
+#     if city_name not in organized_data:
+#         organized_data[city_name] = []
+
+#     # Append the item to the corresponding array
+#     organized_data[city_name].append(item['name'])
 
 # Convert the dictionary to a list of arrays
 # result = list(organized_data.values())
@@ -167,8 +174,8 @@ for item in data:
 # json_data2 = [json.loads(item) for item in formatted_data]
 
 # # Print the result
-with open('locationcitywise.json', 'w') as json_file3:
-    json.dump(organized_data, json_file3, indent=2)
+# with open('locationcitywise.json', 'w') as json_file3:
+    # json.dump(organized_data, json_file3, indent=2)
 
 # print(json_data2)
 
